@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeckillTimeView">
+        <attr name="seckill_time_bg" format="color" />
+        <attr name="seckill_time_text_color" format="color" />
+        <attr name="seckill_time_text_size" format="dimension"/>
+        <attr name="seckill_time_bg_size" format="dimension" />
+        <attr name="seckill_time_margin" format="dimension"/>
+        <attr name="seckill_colon_drawable" format="reference" />
+    </declare-styleable>
+</resources>

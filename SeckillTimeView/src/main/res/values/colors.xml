@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="translucent">#00000000</color>
+    <!--  主色调，C1  -->
+    <color name="primary">#1c232c</color>
+    <color name="primary_alpha">#cc1c232c</color>
+    <color name="primary_press">#3e444b</color>
+    <color name="default_bg">#f7f7f7</color>
+    <color name="white">#ffffff</color>
+</resources>
