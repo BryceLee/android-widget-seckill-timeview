@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 apply from: versions
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.BryceLee'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
