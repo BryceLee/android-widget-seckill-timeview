@@ -24,4 +24,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     api project(':SeckillTimeView')
     api appcompatv7
+    //implementation 'com.github.BryceLee:android-widget-seckill-timeview:1.0'
 }

@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <com.lee.android.widget.seckill.timeview.SeckillTimeView
+        android:id="@+id/timeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"

@@ -9,14 +9,9 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
-import com.lee.android.widget.seckill.seckilltimeview.BuildConfig;
 import com.lee.android.widget.seckill.seckilltimeview.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class SeckillTimeView extends View implements Runnable {
@@ -42,10 +37,12 @@ public class SeckillTimeView extends View implements Runnable {
     private int bgColor, textColor;
     private int textSize;
     private Drawable colonDrawable;
-    private Date date;
-    private SimpleDateFormat hHmmss;
     private Paint transparentPaint;
+    public final static int SECONDS = 1;
+    public final static int MINUTES = 60 * SECONDS;
+    public final static int HOURS = 60 * MINUTES;
 
+    //    public final static int DAYS = 24 * HOURS;
     public SeckillTimeView(Context context) {
         super(context);
         init(context, null);
@@ -115,8 +112,6 @@ public class SeckillTimeView extends View implements Runnable {
         if (colonDrawable != null) {
             this.colonDrawable = colonDrawable;
         }
-        date = new Date();
-        hHmmss = new SimpleDateFormat("HHmmss");
     }
 
     @Override
@@ -186,34 +181,31 @@ public class SeckillTimeView extends View implements Runnable {
      */
     public void start() {
         isCountDowning = true;
-        date.setTime(millisInFuture);
-        String format = hHmmss.format(date);
-        if (BuildConfig.DEBUG) {
-            Log.d("timepoisiton", format + ",millisInFuture=" + millisInFuture);
-        }
-        if (format.length() == 6) {
-            hourDecade = format.substring(0, 1);
-            hourUnit = format.substring(1, 2);
-            minuteDecade = format.substring(2, 3);
-            minuteUnit = format.substring(3, 4);
-            secondDecade = format.substring(4, 5);
-            secondUnit = format.substring(5, 6);
-            Log.d("timepoisiton-time=",
-                    hourDecade + hourUnit + minuteDecade + minuteUnit + secondDecade + secondUnit);
-        } else {
-            if (BuildConfig.DEBUG) {
-                Log.d(this.getClass().getName(), "时间格式化出错啦");
-            }
-        }
-        invalidate();
         if (millisInFuture > 0) {
+            int allSec = (int) (millisInFuture / 1000);
+            int hour = allSec / HOURS;
+            int min = (allSec - hour * HOURS) / MINUTES;
+            int sec = (allSec - hour * HOURS - min * MINUTES);
+            hourDecade = hour < 10 ? "0" : hour / 10 + "";
+            hourUnit = hour < 10 ? "" + hour : hour % 10 + "";
+            minuteDecade = min < 10 ? "0" : min / 10 + "";
+            minuteUnit = min < 10 ? "" + min : min % 10 + "";
+            secondDecade = sec < 10 ? "0" : sec / 10 + "";
+            secondUnit = sec < 10 ? "" + sec : sec % 10 + "";
             removeCallbacks(this);
             postDelayed(this, COUNT_DOWN_INTERVAL);
         } else {
+            hourDecade = "0";//时
+            hourUnit = "0";
+            minuteDecade = "0";
+            minuteUnit = "0";//分
+            secondDecade = "0";//秒
+            secondUnit = "0";
             if (listener != null && endTime > 0) {
                 listener.onCountFinish(this);
             }
         }
+        invalidate();
     }
 
     @Override
